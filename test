@@ -1,0 +1,7 @@
+# pip install vk
+import vk
+
+token = ''
+vk = vk.API(access_token=token)
+for i in range(from,to,-1):
+    vk.messages.restore(message_id=i)
