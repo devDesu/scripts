@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Anton'
-act = 'f6570c970e88dfa8dd428c6e0c728e2ba44547a5a52f000fee4755a1697452be8ca2446380b5160577b52'
+act = ''
 import vk
 import requests
 import json
