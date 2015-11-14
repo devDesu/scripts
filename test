@@ -1,13 +1,20 @@
+#!/usr/bin/python
 # pip install vk
 import vk
 from time import sleep
 
-from = %id%
-to = %id%-100
+fro = %id%
+to = fro-8
 
-token = '%token%'
-vk = vk.API(access_token=token)
-for i in range(from,to,-1):
-    vk.messages.restore(message_id=i)
-    print(i)
-    sleep(10)
+token = ''
+vkapi = vk.API(vk.Session(access_token=token))
+while fro != 0:
+    for i in range(fro,to,-1):
+        try:
+            vkapi.messages.restore(message_id=i)
+            print(i)
+        except Exception as e:
+            print e
+    fro -= 8
+    to -= 8
+    sleep(2)
