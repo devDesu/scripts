@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'Anton'
+__author__ = 'Desu'
 act = ''
 import vk
 import requests
@@ -22,7 +22,7 @@ def send(at, name, msg):
     except:
         return False
 
-mypath = u'C:/Users/Антон/Pictures/EBIN/'
+mypath = u'C:/Users/Desu/Pictures/EBIN/'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f)) and not('posted' in f)]
 left = len(onlyfiles)
 msgFormat = u'осталось: {}, до семестровочки: {}'
