@@ -1,0 +1,19 @@
+import itertools
+import sys
+
+def ft(st):
+        available=True
+        for i in range(1,len(st)-1):
+                if(st[i]=='M'):
+                        available = available and (st[i-1]!='M' and st[i+1]!='M')
+                if(st[i]=='F'):
+                        available = available and not(st[i-1]=='M' and st[i+1]=='M')
+        return available
+        
+
+
+fl = open('file', 'w')	
+mn={"".join(i)+'\n' for i in itertools.permutations('FFFFMM') if ft(list(i))}
+fl.write(str(len(mn)))
+fl.close()
+print 'Finished!'

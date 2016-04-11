@@ -1,10 +1,12 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 __author__ = 'Anton'
-act = ''
+act = '486a04e13816cc7561a3ad768a8b94b0f926dede8d92436bbd8ac0c225bb9060e15ef64330c0aece4eff1'
 import vk
 import requests
 import json
 import time
+import sys
 from os import listdir, rename
 from os.path import isfile, join
 from time import sleep
@@ -23,7 +25,8 @@ def send(at, name, msg):
         return False
 
 mypath = u'C:/Users/Антон/Pictures/EBIN/'
-onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f)) and not('posted' in f)]
+mypath = sys.argv[1]
+onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f)) and not('posted3' in f)]
 left = len(onlyfiles)
 msgFormat = u'осталось: {}, до семестровочки: {}'
 kol = 0
