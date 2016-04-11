@@ -11,8 +11,12 @@ height = 480
 
 cascPath = "/usr/share/opencv/haarcascades/haarcascade_frontalface_alt.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
-print faceCascade
-s_img = cv2.imread("hotline.png", -1)
+print 'loaded haar face cascade'
+if len(sys.argv)>1:
+	name = sys.argv[1]
+else:
+	name = "hotline.png"
+s_img = cv2.imread(name, -1)
 cv2.namedWindow('Video')
 video_capture = cv2.VideoCapture(0)
 video_capture.set(3, width)
@@ -26,7 +30,7 @@ device = open("/dev/video1", "wb", 0)
 
 
 def config_device(device):
-    print(device)
+    print 'configuring device: ', device
     capability = v4l2_capability()
     print "get capabilities result", (fcntl.ioctl(device, VIDIOC_QUERYCAP, capability))
     print "capabilities", hex(capability.capabilities)
