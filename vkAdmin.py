@@ -75,4 +75,4 @@ if ofs == 0 and needed == 0:
     f = open('results.html', 'w')
     f.write('<html><body>')
     f.close()
-proceedUsers(client, str(group_id)[1:], needed, 'results.html', ofs)
+proceedUsers(client, str(group_id)[1:], str(needed), 'results.html', ofs)
