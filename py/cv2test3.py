@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: cp1251 -*-
 import cv2
 import sys
@@ -34,13 +35,14 @@ def config_device(device):
     capability = v4l2_capability()
     print "get capabilities result", (fcntl.ioctl(device, VIDIOC_QUERYCAP, capability))
     print "capabilities", hex(capability.capabilities)
-    #fmt = V4L2_PIX_FMT_YUYV
     #fmt = V4L2_PIX_FMT_YUV420M
     fmt = V4L2_PIX_FMT_YUYV
     #fmt=V4L2_PIX_FMT_SGBRG8 
     print("v4l2 driver: " + capability.driver)
     format = v4l2_format()
+    format2 = v4l2_format()
     format.type = V4L2_BUF_TYPE_VIDEO_OUTPUT
+    format2.type = format.type
     format.fmt.pix.pixelformat = fmt
     format.fmt.pix.width = width
     format.fmt.pix.height = height
@@ -49,6 +51,8 @@ def config_device(device):
     format.fmt.pix.sizeimage = width * height * 2
     format.fmt.pix.colorspace = V4L2_COLORSPACE_JPEG
     print "set format result", (fcntl.ioctl(device, VIDIOC_S_FMT, format))
+    print fcntl.ioctl(device, VIDIOC_G_FMT, format2)
+    print format2.fmt.pix.width
     return format
 
 def ConvertToYUYV(image):

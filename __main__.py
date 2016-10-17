@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-__author__ = 'Anton'
-act = '66a098e7c67195a67f41185ffe8507899188a3e4830c4b5abca8f5a29f811290b17c4b11588ef35d1adf4'
-act = '486a04e13816cc7561a3ad768a8b94b0f926dede8d92436bbd8ac0c225bb9060e15ef64330c0aece4eff1'
+
 import sys
+__author__ = 'Desu'
+act = ''
 import vk
 import requests
 import json

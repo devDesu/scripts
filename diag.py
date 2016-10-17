@@ -30,11 +30,9 @@ def remove_border(axes=None, top=False, right=False, left=True, bottom=True):
     ax.spines['right'].set_visible(right)
     ax.spines['left'].set_visible(left)
     ax.spines['bottom'].set_visible(bottom)
-    
     #turn off all ticks
     ax.yaxis.set_ticks_position('none')
     ax.xaxis.set_ticks_position('none')
-    
     #now re-enable visibles
     if top:
         ax.xaxis.tick_top()
@@ -45,8 +43,15 @@ def remove_border(axes=None, top=False, right=False, left=True, bottom=True):
     if right:
         ax.yaxis.tick_right()
 
-s = [5, 5, 3, 3, 3, 3, 5, 3, 4, 1, 5, 2, 5, 0, 1, 3, 0, 0, 0, 2, 0, 2, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1,\
-	0, 0, 0, 0, 2] #6.4
+def read_data(to, file):
+    f = open(file, 'r')
+    for i in f.readlines():
+        if r'#' not in i:
+            to.append(int(i)) 
+
+s = []
+
+read_data(s, 'count.txt')
 i = date_range('29/2/2016', periods=len(s))
 i = [(str(i[n])[:str(i[n]).index(' ')]) for n in range(0, len(i))]
 df = DataFrame(s, index=i, columns=['количество'])# date_range('29/3/2016', periods=len(s)))
