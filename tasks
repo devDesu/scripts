@@ -1,5 +1,0 @@
-lim (sin2x+sin9x)/(sqrt(1+5x)-sqrt(1-4x))
-x->0
-
-lim (sqrt(1+2x^2)-sqrt(1-3x^2))/(cos7x-cos4x)
-x->0
