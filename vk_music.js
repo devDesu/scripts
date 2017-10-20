@@ -1,16 +1,11 @@
-//curl 'https://vk.com/al_audio.php' -H 'origin: https://vk.com' -H 'dnt: 1' -H 'accept-encoding: gzip, deflate, br' -H 'x-requested-with: XMLHttpRequest' -H 'accept-language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4' -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36' -H 'content-type: application/x-www-form-urlencoded' -H 'accept: */*' -H 'referer: https://vk.com/audios59549936' -H 'authority: vk.com' -H 'cookie: remixlang=0; remixdt=0; remixstid=908229232_b0d6da16f94802434c; remixttpid=530ffd52aa20d478bad2ec09ad2645d30cfe9a6207; remixrefkey=74c9ca889b42fe3bc7; remixseenads=0; remixsid=98b8d2662ae0e929e04b63faf2fa3ea2012c9e246d8749909560f; remixflash=0.0.0; remixscreen_depth=24; remixab=1; tmr_detect=1%7C1508411351067; remixcurr_audio=59549936_456239104' --data 'act=reload_audio&al=1&ids=59549936_456239104%2C59549936_456239103%2C59549936_456239102%2C59549936_456239101%2C59549936_456239100%2C59549936_456239104' --compressed
-//curl 'https://vk.com/al_audio.php' -H 'content-type: application/x-www-form-urlencoded' -H 'cookie: remixstid=908229232_b0d6da16f94802434c; remixttpid=530ffd52aa20d478bad2ec09ad2645d30cfe9a6207; remixrefkey=74c9ca889b42fe3bc7; remixseenads=0; remixsid=98b8d2662ae0e929e04b63faf2fa3ea2012c9e246d8749909560f;' --data 'act=reload_audio&al=1&ids=59549936_456239104%2C59549936_456239103%2C59549936_456239102%2C59549936_456239101%2C59549936_456239100%2C59549936_456239104' --compressed
-
 var querystring = require('querystring');
-var https = require( /*'follow-redirects')*/ 'https');
-var fs = require('fs');
-var cheerio = require('cheerio');
+var https = require('https');
 var iconv = require('iconv-lite');
-const util = require('util'),
-    request = util.promisify(https.request);
+const readline = require('readline-sync');
 
-var my_id = 59549936;
-var COOKIE = 'remixstid=908229232_b0d6da16f94802434c; remixttpid=530ffd52aa20d478bad2ec09ad2645d30cfe9a6207; remixrefkey=74c9ca889b42fe3bc7; remixseenads=0; remixcurr_audio=59549936_456239103; remixflash=0.0.0; remixscreen_depth=24; remixsid=7f39583b100bccea10f0e53fe777cef94c8eb9695d16b90f146d0';
+var my_id = parseInt(readline.question("Enter your ID: "));
+
+var COOKIE = readline.question("Enter your cookies: ");
 var USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36';
 
 function httpsRequest(params, postData) {
@@ -122,38 +117,6 @@ function s(t, e) {
     return o
 }
 
-function getMusicPage(callback) {
-    //https://vk.com/audios59549936
-    var get_options = {
-        host: 'vk.com',
-        scheme: 'https',
-        port: '443',
-        path: `/audios${my_id}`,
-        method: 'GET',
-        headers: {
-            'Cookie': COOKIE,
-            'user-agent': USER_AGENT
-        }
-    };
-
-    // Set up the request
-    var get_req = https.get(get_options, res => {
-        //        console.log(res.statusCode, res);
-        let data = '';
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-            console.log('Response: ' + chunk);
-            data += chunk;
-            //callback(chunk);
-        });
-
-        res.on('end', () => {
-            console.log('GET finished');
-            cb(data);
-        });
-    });
-}
-
 async function audio_api(payload, callback) {
     // Build the post string from an object
 
@@ -245,7 +208,6 @@ async function getSources(playlist) {
             return false;
         }
     })
-    console.log(ids, ids.length);
     for (let i = 0; i * 9 < ids.length; i++) {
         console.log(`\n ON ITERATION ${i}. from ${9*i} to ${9*(i+1)} \n`);
         pd.ids = ids.slice(9 * i, 9 * (i + 1))
